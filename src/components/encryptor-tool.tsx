@@ -746,7 +746,7 @@ export function EncryptorTool() {
                 {mode === 'decrypt' && inputType === 'text' && showDecryptedText && (
                   <Dialog open={isDecryptQrModalOpen} onOpenChange={setIsDecryptQrModalOpen}>
                     <DialogTrigger asChild>
-                      <Button type="button" variant="ghost" size="icon" className="h-auto p-2">
+                      <Button type="button" variant="ghost" size="icon" className="h-auto p-2" disabled={!selectedDecryptText}>
                         <QrCode />
                       </Button>
                     </DialogTrigger>

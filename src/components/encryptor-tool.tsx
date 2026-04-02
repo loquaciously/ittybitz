@@ -188,6 +188,7 @@ export function EncryptorTool() {
   const [isCryptoAvailable, setIsCryptoAvailable] = useState(true);
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isDecryptQrModalOpen, setIsDecryptQrModalOpen] = useState(false);
+  const [selectedDecryptText, setSelectedDecryptText] = useState('');
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const clipboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { toast } = useToast();
@@ -694,6 +695,8 @@ export function EncryptorTool() {
                   "pr-12",
                   mode === 'decrypt' && inputType === 'text' && !showDecryptedText && "blur-sm"
                 )}
+                onMouseUp={() => { const ta = document.getElementById('output-text') as HTMLTextAreaElement; if (ta) { const sel = ta.value.substring(ta.selectionStart, ta.selectionEnd); setSelectedDecryptText(sel || outputText); } }}
+                onKeyUp={() => { const ta = document.getElementById('output-text') as HTMLTextAreaElement; if (ta) { const sel = ta.value.substring(ta.selectionStart, ta.selectionEnd); setSelectedDecryptText(sel || outputText); } }}
               />
               <div className="absolute right-1 top-1 flex flex-col items-center">
                  {mode === 'decrypt' && inputType === 'text' && (
@@ -745,7 +748,7 @@ export function EncryptorTool() {
                 {mode === 'decrypt' && inputType === 'text' && showDecryptedText && (
                   <Dialog open={isDecryptQrModalOpen} onOpenChange={setIsDecryptQrModalOpen}>
                     <DialogTrigger asChild>
-                      <Button type="button" variant="ghost" size="icon" className="h-auto p-2">
+                      <Button type="button" variant="ghost" size="icon" className="h-auto p-2" onClick={() => { const ta = document.getElementById('output-text') as HTMLTextAreaElement; if (ta) { const sel = ta.value.substring(ta.selectionStart, ta.selectionEnd); setSelectedDecryptText(sel || outputText); } }}>
                         <QrCode />
                       </Button>
                     </DialogTrigger>
@@ -757,11 +760,11 @@ export function EncryptorTool() {
                         </DialogDescription>
                       </DialogHeader>
                       <div className="flex flex-col items-center gap-4 py-4">
-                        {outputText.length <= QR_MAX_CHARS ? (
+                        {selectedDecryptText.length <= QR_MAX_CHARS ? (
                           <>
-                            <QRCode value={outputText} size={256} />
+                            <QRCode value={selectedDecryptText} size={256} />
                             <div ref={hiResDecryptQrRef} style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}>
-                              <QRCodeCanvas value={outputText} size={900} />
+                              <QRCodeCanvas value={selectedDecryptText} size={900} />
                             </div>
                             <Button onClick={handleDownloadDecryptQrCode}>
                               <Download className="mr-2 h-4 w-4" />
@@ -771,7 +774,7 @@ export function EncryptorTool() {
                         ) : (
                           <div className="text-sm text-yellow-400 p-3 bg-yellow-900/20 rounded-md text-center">
                             <p className="font-medium">QR code unavailable</p>
-                            <p className="mt-1">Output is {outputText.length.toLocaleString()} characters, which exceeds the QR code capacity of {QR_MAX_CHARS.toLocaleString()} characters. Use the copy button instead.</p>
+                            <p className="mt-1">Output is {selectedDecryptText.length.toLocaleString()} characters, which exceeds the QR code capacity of {QR_MAX_CHARS.toLocaleString()} characters. Use the copy button instead.</p>
                           </div>
                         )}
                       </div>

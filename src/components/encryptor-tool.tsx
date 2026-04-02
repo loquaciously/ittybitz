@@ -788,7 +788,7 @@ export function EncryptorTool() {
       <header className="sticky top-0 z-50 w-full border-b border-zinc-700 bg-background/80 backdrop-blur-sm">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2">
-            <img src="/logo.webp" alt="IttyBitz Logo" width={28} height={28} />
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/logo.webp`} alt="IttyBitz Logo" width={28} height={28} />
             <span className="text-lg font-bold">IttyBitz</span>
           </div>
           <TabsList className="hidden sm:inline-flex bg-zinc-800 p-1">
@@ -821,7 +821,7 @@ export function EncryptorTool() {
         <div className="mx-auto max-w-2xl px-4 sm:px-6 py-6 sm:py-8">
           {/* Desktop-only large logo + name */}
           <div className="hidden sm:flex items-center justify-center gap-3 mb-6">
-            <img src="/logo.webp" alt="IttyBitz Logo" width={48} height={48} />
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/logo.webp`} alt="IttyBitz Logo" width={48} height={48} />
             <span className="text-4xl font-bold text-white">IttyBitz</span>
           </div>
           <div className="mb-6 text-center">

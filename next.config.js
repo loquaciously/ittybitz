@@ -6,6 +6,9 @@ const nextConfig = {
   output: 'export',
   basePath: isProd ? '/ittybitz' : '',
   assetPrefix: isProd ? '/ittybitz' : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? '/ittybitz' : '',
+  },
 };
 
 // The bundle analyzer is a Webpack-only plugin.

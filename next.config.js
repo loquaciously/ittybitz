@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   output: 'export',
+  basePath: isProd ? '/ittybitz' : '',
+  assetPrefix: isProd ? '/ittybitz' : '',
 };
 
 // The bundle analyzer is a Webpack-only plugin.

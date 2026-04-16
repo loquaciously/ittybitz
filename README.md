@@ -1,4 +1,39 @@
-# 🔒 IttyBitz
+# My Contribution
+
+This repository is a fork of the original project:
+https://github.com/seQRets/ittybitz
+
+## Feature Added: QR Code Output for Decrypted Data
+
+Added a QR code display feature for decrypted plaintext output, designed to securely transfer seed phrases and passphrases to hardware wallets (e.g., Coldcard Q) via QR scan.
+
+## Pull Request
+https://github.com/seQRets/ittybitz/pull/9
+
+## Key Functionality
+- Displays a QR input field after decryption output is revealed
+- Allows users to encode selected plaintext (seed words, passphrase, or partial output)
+- QR button remains disabled until valid input is entered (prevents misuse)
+- Generates a 256px scannable QR code in a dialog
+- Enforces QR size limits (2,953 character max) with clear user feedback
+- Resets state cleanly when switching between encrypt/decrypt modes
+
+## Security Considerations
+- No download option for plaintext QR codes (prevents sensitive data being written to disk)
+- Feature operates only at the display layer (no changes to cryptographic logic)
+
+## Testing
+- Tested across Chrome, Edge, and Firefox
+- Verified end-to-end functionality with a Coldcard Q hardware wallet
+- Confirmed correct fingerprint generation for both seed phrase and passphrase QR scans
+
+## Implementation Notes
+- Reused existing components (`QRCode`, `QR_MAX_CHARS`, `Dialog`)
+- Integrated cleanly without modifying core encryption/decryption logic
+
+---
+
+# Original README (below)l/9
 
 <br/>
 
